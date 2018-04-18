@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 2.6)
+set (CMAKE_CXX_COMPILER /usr/bin/g++ )
+set (CMAKE_CXX_STANDARD 14)
+
+project(image-reading2)
+
+set(myprog code.cpp)
+set(LIBRARIE ${CMAKE_CURRENT_SOURCE_DIR}/files/libraries)
+set(INCLUDE_ ${CMAKE_CURRENT_SOURCE_DIR}/files/include/)
+
+link_directories(${LIBRARIE})
+#add_library(libopencv_highgui SHARED ${LIBRARIE})
+#add_library(libopencv_core SHARED ${LIBRARIE})
+#add_library(libopencv_imgcodecs SHARED ${LIBRARIE})
+#add_library(libopencv_imgproc SHARED ${LIBRARIE})
+#set_target_properties(libopencv_highgui PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/res/libopencv_highgui.so})
+#set_target_properties(libopencv_core PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/res/libopencv_core.so})
+#set_target_properties(libopencv_highgui PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/res/libopencv_imgcodecs.so})
+#set_target_properties(libopencv_imgproc PROPERTIES IMPORTED_LOCATION ${CMAKE_BINARY_DIR}/res/libopencv_imgproc.so})
+
+find_library(LIBRARIES NAMES libopencv_highgui.so libopencv_core.so libopencv_imgcodecs.so libopencv_imgproc.so PATHS ${LIBRARIE})
+#find_library(lib2 libopencv_core.so)
+#find_library(lib3 libopencv_imgcodecs.so)
+#find_library(lib4 libopencv_imgproc.so)
+
+include_directories(${INCLUDE_})
+
+add_executable(${PROJECT_NAME} ${myprog} )
+message(STATUS ${CMAKE_CURRENT_SOURCE_DIR} )
+target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
